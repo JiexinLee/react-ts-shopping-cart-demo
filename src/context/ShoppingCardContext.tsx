@@ -17,10 +17,10 @@ type ShoppingCartContext = {
   removeItemFromCart: (id: number) => void;
 };
 
-const ShoppingCartContext = createContext({} as ShoppingCartContext);
+const ShoppingCartCtx = createContext({} as ShoppingCartContext);
 
 export function useShoppingCart() {
-  return useContext(ShoppingCartContext);
+  return useContext(ShoppingCartCtx);
 }
 
 export function ShoppingCardProvider({ children }: ShoppingCartProviderProps) {
@@ -39,7 +39,7 @@ export function ShoppingCardProvider({ children }: ShoppingCartProviderProps) {
   }
   function increaseCartQuantity(id: number) {
     setCartItems((currItems) => {
-      console.log(currItems);
+      // console.log(currItems);
       if (currItems.find((item) => item.id === id) == null) {
         return [...currItems, { id, quantity: 1 }];
       } else {
@@ -74,7 +74,7 @@ export function ShoppingCardProvider({ children }: ShoppingCartProviderProps) {
     });
   }
   return (
-    <ShoppingCartContext.Provider
+    <ShoppingCartCtx.Provider
       value={{
         getItemQuantity,
         increaseCartQuantity,
@@ -88,6 +88,6 @@ export function ShoppingCardProvider({ children }: ShoppingCartProviderProps) {
     >
       {children}
       <ShoppingCart isOpen={isOpen} />
-    </ShoppingCartContext.Provider>
+    </ShoppingCartCtx.Provider>
   );
 }
