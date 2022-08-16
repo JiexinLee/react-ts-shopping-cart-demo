@@ -1,14 +1,15 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import Home from "./pages/Home";
 import Store from "./pages/Store";
 import About from "./pages/About";
 import NavBar from "./components/NavBar";
+import { ShoppingCardProvider } from "./context/ShoppingCardContext";
 
 function App() {
   return (
-    <Fragment>
+    <ShoppingCardProvider>
       <NavBar />
       <Container className="mb-4">
         <Routes>
@@ -17,7 +18,7 @@ function App() {
           <Route path="/about" element={<About />}></Route>
         </Routes>
       </Container>
-    </Fragment>
+    </ShoppingCardProvider>
   );
 }
 
