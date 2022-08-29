@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Reminder } from "../models/Reminders";
 import ReminderList from "./ReminderList";
-
-const reminders: Reminder[] = [
-  {
-    id: 1,
-    title: "Reminder 1",
-  },
-];
+import reminderService from "../services/reminder";
 
 function Home() {
+  const [reminders, setReminders] = useState<Reminder[]>([]);
+
+  useEffect(() => {
+    loadReminders();
+  }, []);
+
+  const loadReminders = async () => {
+    const reminders = await reminderService.getReminders();
+    setReminders(reminders);
+  };
   return (
     <div>
       <ReminderList items={reminders} />
