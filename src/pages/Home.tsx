@@ -10,13 +10,20 @@ function Home() {
     loadReminders();
   }, []);
 
+  const removeReminder = async (id: number) => {
+    if (id == null) return;
+    await reminderService.removeReminder(id);
+    const newReminders = reminders.filter((reminder) => reminder.id !== id);
+    setReminders(newReminders);
+  };
+
   const loadReminders = async () => {
     const reminders = await reminderService.getReminders();
     setReminders(reminders);
   };
   return (
     <div>
-      <ReminderList items={reminders} />
+      <ReminderList items={reminders} onRemoveReminder={removeReminder} />
     </div>
   );
 }
