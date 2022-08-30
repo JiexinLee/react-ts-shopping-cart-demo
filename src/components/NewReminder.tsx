@@ -7,8 +7,10 @@ interface NewReminderProps {
 function NewReminder({ onAddReminder }: NewReminderProps): JSX.Element {
   const [title, setTitle] = useState("");
   const submitForm = (e: React.FormEvent) => {
+    if (title == null || title === "") return;
     e.preventDefault();
     onAddReminder(title);
+    setTitle("");
   };
   return (
     <form onSubmit={submitForm}>
